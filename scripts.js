@@ -19,7 +19,6 @@ const divide = (a,b) => {
     else{
         return roundNumber(a / b)
     }
-
 }
 
 function roundNumber(num){
@@ -102,7 +101,6 @@ function pressedOperator(event){
             currentDisplayNumber += opText
         }
         secondNumber = undefined
-
     }
     else{
         throw new Error("Unexpected Error on Operator Press.");
@@ -121,11 +119,9 @@ function addEvents(){
     for (const button of digits){
         button.addEventListener("click", pressedNumber)
     }
-    
     for (const button of operators){
         button.addEventListener("click",pressedOperator)
     }
-
     clearButton.addEventListener("click",clearAll)
 }
 
