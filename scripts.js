@@ -8,10 +8,28 @@ const digits = document.getElementById("digits").querySelectorAll("button")
 const clearButton = document.getElementById("clear")
 const operators = document.getElementById("operators").querySelectorAll("button")
 
-const add = (a,b) => Number(a) + Number(b) 
-const subtract = (a,b) => a - b
-const multiply = (a,b) => a * b
-const divide = (a,b) => a / b
+const add = (a,b) => roundNumber(Number(a) + Number(b) )
+const subtract = (a,b) => roundNumber(a - b)
+const multiply = (a,b) => roundNumber(a * b)
+const divide = (a,b) => {
+    if(b == 0){
+        alert("𓅯 Can't divide by 0 you silly goose! 𓅯")
+        return a / 1;
+    }
+    else{
+        return roundNumber(a / b)
+    }
+
+}
+
+function roundNumber(num){
+    if (num % 1 !== 0){
+        return (1 * num.toFixed(6))
+    }
+    else{
+        return num
+    }
+}
 
 const operate = (a,b,op) => {
     switch(op){
@@ -25,6 +43,7 @@ const operate = (a,b,op) => {
 
 const updateDisplay = (result) => 
     resultDisplay.textContent = result;
+
 
 function pressedNumber(event){
     numPressed = event.target.textContent
@@ -51,7 +70,7 @@ function pressedNumber(event){
 
 function pressedOperator(event){
     opText = event.target.textContent
-    lastChar = currentDisplayNumber.slice(-1)
+    lastChar = currentDisplayNumber.toString().slice(-1)
     if( lastChar === "+" || lastChar === "-" || lastChar === "*" || lastChar === "/"){
         operator = opText
         currentDisplayNumber = currentDisplayNumber.slice(0,-1) + opText
