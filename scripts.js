@@ -8,7 +8,7 @@ const digits = document.getElementById("digits").querySelectorAll("button")
 const clearButton = document.getElementById("clear")
 const operators = document.getElementById("operators").querySelectorAll("button")
 
-const add = (a,b) => a + b 
+const add = (a,b) => Number(a) + Number(b) 
 const subtract = (a,b) => a - b
 const multiply = (a,b) => a * b
 const divide = (a,b) => a / b
@@ -25,7 +25,7 @@ const operate = (a,b,op) => {
 
 const updateDisplay = (result) => 
     resultDisplay.textContent = result;
-    //currentDisplayNumber = result.toString();
+    //currentDisplayNumber = result.textContent;
 
 function pressedNumber(event){
     if(currentDisplayNumber == 0){
@@ -45,21 +45,43 @@ function pressedNumber(event){
 }
 
 function pressedOperator(event){
+    opText = event.target.textContent
+    //if(opText === "="){
+    //    console.log("blehhh")
+    //}
     if (!secondNumber){
-        operator = (event.target.textContent)
+        operator = opText
+        firstNumber = currentDisplayNumber
         currentDisplayNumber += operator
         updateDisplay(currentDisplayNumber)
     }
     else if(secondNumber){
-        updateDisplay(operate(firstNumber,secondNumber,operator))
+        currentDisplayNumber = updateDisplay(operate(firstNumber,secondNumber,operator))
+        firstNumber = currentDisplayNumber
+        if(opText === "="){
+            operator = undefined
+            updateDisplay(currentDisplayNumber)
+        }
+        else{
+            updateDisplay(currentDisplayNumber + opText)
+            operator = opText
+            currentDisplayNumber += opText
+        }
+        secondNumber = undefined
+
     }
-    else if(operator){
-        updateDisplay(currentDisplayNumber)
+    else{
+        console.log("blah")
+        //currentDisplayNumber[currentDisplayNumber.length-1] = opText
+        //updateDisplay(currentDisplayNumber)
     }
 }
 
 function clearAll(){
     currentDisplayNumber = 0
+    firstNumber = undefined
+    secondNumber = undefined
+    operator = undefined
     updateDisplay(currentDisplayNumber)
 }
 
@@ -76,3 +98,4 @@ function addEvents(){
 }
 
 addEvents()
+//clearAll()
