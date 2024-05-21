@@ -25,17 +25,22 @@ const operate = (a,b,op) => {
 
 const updateDisplay = (result) => 
     resultDisplay.textContent = result;
-    //currentDisplayNumber = result.textContent;
 
 function pressedNumber(event){
+    numPressed = event.target.textContent
     if(currentDisplayNumber == 0){
-        currentDisplayNumber = event.target.textContent
+        currentDisplayNumber = numPressed
     }
     else{
-        currentDisplayNumber += event.target.textContent
+        currentDisplayNumber += numPressed
     }
     if(!operator){
         firstNumber = currentDisplayNumber
+    }
+    else if(operator === "="){
+        currentDisplayNumber = numPressed
+        updateDisplay(numPressed)
+        operator = undefined
     }
     else{
         splitResult = currentDisplayNumber.split(operator)
@@ -46,14 +51,24 @@ function pressedNumber(event){
 
 function pressedOperator(event){
     opText = event.target.textContent
-    //if(opText === "="){
-    //    console.log("blehhh")
-    //}
-    if (!secondNumber){
+    lastChar = currentDisplayNumber.slice(-1)
+    if( lastChar === "+" || lastChar === "-" || lastChar === "*" || lastChar === "/"){
         operator = opText
-        firstNumber = currentDisplayNumber
-        currentDisplayNumber += operator
+        currentDisplayNumber = currentDisplayNumber.slice(0,-1) + opText
         updateDisplay(currentDisplayNumber)
+    }
+    else if (!secondNumber){
+        {
+            if(opText === "="){
+                operator = opText
+            }
+            else{
+                operator = opText
+                firstNumber = currentDisplayNumber
+                currentDisplayNumber += operator
+                updateDisplay(currentDisplayNumber)
+            }
+        }
     }
     else if(secondNumber){
         currentDisplayNumber = updateDisplay(operate(firstNumber,secondNumber,operator))
@@ -71,9 +86,7 @@ function pressedOperator(event){
 
     }
     else{
-        console.log("blah")
-        //currentDisplayNumber[currentDisplayNumber.length-1] = opText
-        //updateDisplay(currentDisplayNumber)
+        throw new Error("Unexpected Error on Operator Press.");
     }
 }
 
@@ -98,4 +111,3 @@ function addEvents(){
 }
 
 addEvents()
-//clearAll()
