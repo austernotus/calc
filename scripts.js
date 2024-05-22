@@ -5,7 +5,7 @@ let currentDisplayNumber = 0
 
 const resultDisplay = document.getElementById("result").querySelector("p")
 const digits = document.getElementById("digits").querySelectorAll("button")
-const clearButton = document.getElementById("clear")
+const clearButton = document.getElementById("clearDiv").querySelector("button")
 const operators = document.getElementById("operators").querySelectorAll("button")
 
 const add = (a,b) => roundNumber(Number(a) + Number(b) )

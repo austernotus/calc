@@ -1,17 +1,93 @@
+body{
+    background-color: #1b3a46;
+    font-weight: bolder;
+}
+
+#main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+#result{
+    padding-right:10px;
+    font-size: larger;
+    display: flex;
+    width: 90%;
+    border-radius: 10px;
+    background-color: #fdf3e4;
+    justify-content: flex-end;
+    align-self: center;
+    margin-bottom: 10px;
+}
+
+button{
+    border-radius:10px;
+    padding:2px;
+    margin:0.1em 0;
+    font-weight:bold;
+}
+
+#buttons{
+    display: flex;
+    flex-direction: column;
+    width:90%;
+    align-self: center;
+}
+
+#calculatorBody {
+    background-color: #ffe5c1;
+    display: flex;
+    flex-direction: column;
+    border-radius:5%;
+    padding: 10px 1px;
+    min-width:20%;
+}
+
 #digits{
     display:flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 #digits button{
-    flex-basis:30%;
+    flex-basis:33.3%;
+    background-color: #874F41;
+    color:white;
+    justify-content: center;
 }
 
-#clear {
-    display: flex;
+#operators, #clearDiv{
+    display:flex;
+    
+}
+
+#operators button{
+    flex-basis: 20%;
+
+}
+
+#operators button, #clearDiv button{
+    background-color: #90AEAD;
+    color:white;
+}
+
+#clearDiv button {
     flex-basis:100%;
+    justify-content: center;
 }
 
-#clearDiv {
-    display: flex;
+#thanks{
+    color:white;
+    text-align: center;
+}
+
+a:visited{
+    color:rgb(212, 139, 5);
+}
+
+a:link{
+    color:orange;
 }
